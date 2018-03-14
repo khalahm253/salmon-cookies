@@ -4,9 +4,11 @@ var timeSlots = ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12pm:', '1pm
 var totalcustomers = 0;
 var totalcookies = 0;
 var tableId = document.getElementById('tableId');
-var trEl = document.createElement('tr');
-
 var storeHolder = [];
+
+function newFunction() {
+  trEl = document.createElement('tr');
+}
 
 function CookieStores(name, minCustomer, maxCustomer, minCookie, maxCookie) {
   this.name = name;
@@ -37,7 +39,7 @@ CookieStores.prototype.render = function() {
     trEl.appendChild(tdEl);
     tableId.appendChild(trEl);
   }
-  var tdEl = document.createElement('td');
+  tdEl = document.createElement('td');
   tdEl.textContent = totalcustomers + ' total customers today and ' + totalcookies + ' cookies sold';
   trEl.appendChild(tdEl);
   tableId.appendChild(trEl);
@@ -51,7 +53,7 @@ function makeHeaderRow() {
     trEl.appendChild(thEl);
     tableId.appendChild(trEl);
   }
-  var thEl = document.createElement('th');
+  thEl = document.createElement('th');
   thEl.textContent = 'Totals';
   trEl.appendChild(thEl);
 }
