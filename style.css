@@ -1,35 +1,34 @@
-body{
-    background: rgb(48, 7, 230);
+
+body {
+  background: rgb(48, 7, 230);
   
-  }
+}
+a {
+  color: white;  
+}
+h1, h2 {
+  color: white;
+  text-align: center;
+  font-family: 'Abel', sans-serif;
+  font-size: 40px;
+}
+
+table {
+	border: 10px solid rgb(226, 228, 138);
   
-  h1 {
-   font-family: 'Abel', sans-serif;
-   font-size: 50px;
-   color: aliceblue;
-  }
-  
-  h3 {
-    border: 10px solid red;
-    border-color: red;
-    color: rgb(233, 236, 4);
-  }
-  
-  li {
-    font-family: 'Abel', 'sans-serif';
-    font-size: 30px;
-    color: white;
-    padding: 10px;
-    margin: 5px 30px;
-  }
-  
-  p{
-    font-family: 'Abel', 'sans-serif';
-    font-size: 30px;
-    color: white;
-  }
-  
-  b {
-    font-family: 'Abel', 'sans-serif';
-    font-size: 50px;
-  }
+}
+
+td {
+	padding: 10px;
+	border-radius: 30px;
+  border: 4px groove rgb(223, 15, 15);
+  background: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12spx;
+}
+
+th {
+	background-color: white;
+  color: #76323F;
+
+}
