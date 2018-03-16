@@ -50,7 +50,7 @@ CookieStores.prototype.render = function () {
   tdEl.textContent = this.avgCookie;
   trEl.appendChild(tdEl);
   tableId.appendChild(trEl);
-}
+};
 
 function makeHeaderRow() {
   var trEl = document.createElement('tr');
