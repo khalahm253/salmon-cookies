@@ -13,8 +13,7 @@ h1, h2 {
 }
 
 table {
-	border: 10px solid rgb(226, 228, 138);
-  
+  border: 10px solid rgb(226, 228, 138);
 }
 
 td {
@@ -23,11 +22,33 @@ td {
   border: 4px groove rgb(223, 15, 15);
   background: white;
   font-family: 'Roboto Mono', monospace;
-  font-size: 12spx;
+  font-size: 12px;
 }
 
 th {
 	background-color: white;
   color: #76323F;
 
+}
+
+legend {
+  color: white;
+  font-size: 20px;
+}
+
+input {
+  width: 15%;
+  margin: 8px;
+
+}
+
+label{
+  color: white;
+}
+
+footer img{
+  width: 20%;
+  display: inline-block;
+  background-color: red;
+  
 }
