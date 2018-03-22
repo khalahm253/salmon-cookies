@@ -1,54 +1,218 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: rgb(48, 7, 230);
-  
+  background-color: rgba(182, 79, 51, 0.1);
+  font-size: 16px;
+  font-family: Georgia, serif;
+  color: #833925;
 }
-a {
-  color: white;  
+
+section {
+  padding: 1.8rem 10%;
+  border-top: 1px solid salmon;
+  width: 100%;
+  overflow: auto;
+  clear: both;
 }
-h1, h2 {
-  color: white;
+
+section:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+.page-header, .page-footer{
+  padding: 1rem 10%;
+}
+
+.page-header {
+  overflow: auto;
+}
+
+.page-header a {
+  text-decoration: none;
+}
+
+.page-footer {
+  overflow: auto;
+  padding-bottom: 2rem;
+  border-top: 1px solid salmon;
+}
+
+.logo {
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+.site-title {
+  display: block;
   text-align: center;
-  font-family: 'Abel', sans-serif;
-  font-size: 40px;
+  margin: 0.5em auto;
+  font-family: 'Chelsea Market', serif;
+}
+
+.tagline {
+  text-align: center;
+  font-style: italic;
+}
+
+h1, h2, h3 {
+  color: #692513;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 26px;
+  margin-bottom: 1em;
+  margin-top: 0.5em;
+}
+
+h2.store-hours {
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+strong {
+  font-weight: bold;
+}
+
+img {
+  max-width: 400px;
+}
+
+ul {
+  margin-bottom: 1rem;
+}
+
+li {
+  list-style-type: circle;
+  list-style-position: inside;
+  margin-top: 0.7em;
+  font-family: Helvetica, sans-serif;
+  color:#b64f33;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  color: #b64f33;
+}
+
+a:hover, a:focus {
+  color: salmon;
+}
+
+.store-info p {
+  line-height: 1.2;
 }
 
 table {
-  border: 10px solid rgb(226, 228, 138);
+  border: 2px solid #692513; 
 }
 
+tr:first-of-type {
+  border-bottom: 2px solid #692513;
+}
+
+tr:last-of-type {
+  border-top: 2px solid #692513;
+}
+
+td:first-of-type, th:first-of-type {
+  border-right: 2px solid #692513;
+  text-align: left;
+}
+
+td:last-of-type, th:last-of-type {
+  border-left: 2px solid #692513;
+}
+
+td, th, button {
+  padding: 10px;
+  border: 1px solid salmon;
+}
 td {
-	padding: 10px;
-	border-radius: 30px;
-  border: 4px groove rgb(223, 15, 15);
-  background: white;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 12px;
+  text-align: right;
 }
 
-th {
-	background-color: white;
-  color: #76323F;
-
+th, legend {
+  color: #692513;
+  font-size: 1.1em;
 }
 
-legend {
-  color: white;
-  font-size: 20px;
+fieldset {
+  border: 1px solid salmon;
+  margin: 2em 0;
+  padding: 1em;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5em;
+  margin-right: 1em;
 }
 
 input {
-  width: 15%;
-  margin: 8px;
-
+  padding: 0.5em;
+  margin-bottom: 0.5em;
 }
 
-label{
-  color: white;
+button {
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-top: 1em;
 }
 
-footer img{
-  width: 20%;
+#home-intro img {
+  float: right;
+}
+
+#family img, 
+#merchandise img {
+  float: left;
+  margin-right: 25px;
+  border-radius: 10px;
+}
+
+#merchandise img {
+  height: 220px;
+}
+
+#cookies-how img {
+  margin-left: 25px;
+    float: right;
+    width: auto;
+    height: 160px;
+    border: 3px solid salmon;
+    border-radius: 10px;
+}
+
+.fancy-text{
+  font-style: italic;
+}
+
+.store-info {
+  width: 250px;
+  border-left: 2px solid salmon;
   display: inline-block;
-  background-color: red;
-  
+  padding-left: 15px;
+  padding-bottom: 0.7rem;
+  margin-bottom: 25px;
+}
+
+.phone {
+  display: block;
+  margin-top: 5px;
 }

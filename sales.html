@@ -1,41 +1,53 @@
 <!DOCTYPE html>
-
 <html>
   <head>
-    <title>Salmon Cookies</title>
-    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
-    <link href="https://fonts.googleapis.com/css?family=Abel|Roboto+Mono" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta charset="utf-8":>
+    <title>Sales Projections for Pat's Salmon Cookies
+    </title>
+    <link type="text/css" rel="stylesheet" href="style.css"></link>
+    <link href="https://fonts.googleapis.com/css?family=Chelsea+Market" rel="stylesheet">
+
   </head>
+  <header class="page-header">
+    <a href="index.html"><img class="logo" src="img/salmon.png"></a>
+    <a href="index.html"><h1 class="site-title">Pat's Salmon Cookies</h1></a>
+  </header>
   <body>
-    <h1>Salmon Cookies Product Legend</h1>
-    <img  src="img/salmon.png" id="salmon-pic">
-    <nav>
-      <a href="index.html">Home</a>
-      <!-- < a href="location.html"></a> -->
-    </nav>
-    <table id="tableId"></table>
+    <main>
+      <section>
+      <h2>Cookies Needed by Location Each Day</h2>
+<table id="store-locations">
 
-    <form id="cookies-form">
-      <fieldset>
-        <legend>Cookie Stores</legend>
+</table>
+      </section>
+      <section>
+<form id="form-add-location">
+  <fieldset>
+    <legend>Add a Store Location</legend>
 
-        <label for="storeName">storeName:</label>
-        <input name="storeName" type="text" />
+    <label for="locationName">Location Name:</label>
+    <input name="locationName" type="text"><br>
 
-        <label for="minCustomer">minCustomer:</label>
-        <input name="minCustomer" type="text" />
+    <label for="minCust">Minimum Customers per Hour:</label>
+    <input name="minCust" type="number"><br>
 
-        <label for="maxCustomer">maxCustomer:</label>
-        <input name="maxCustomer" type="text" />
+    <label for="maxCust">Maximum Customers per Hour:</label>
+    <input name="maxCust" type="number"><br>
 
-        <label for="avgCookie">avgCookie:</label>
-        <input name="avgCookie" type="text" />
+    <label for="avgCookies">Average Cookies per Sale:</label>
+    <input name="avgCookies" type="number" step="0.1"><br>
 
-
-        <button id="add-store">Store</button>
-      </fieldset>
-    </form>
-    <script src="apps.js"></script>
-    </body>
+    <button id="button-add-store">Add Location</button>
+  </fieldset>
+</form>
+      </section>
+    </main>
+    <script type="text/javascript" src="apps.js"></script>
+    <footer class="page-footer">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sales.html">Sales Projections</a></li>
+      </ul>
+    </footer>
+  </body>
 </html>

@@ -1,90 +1,125 @@
 'use strict';
 
-var timeSlots = ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12pm:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', '8pm:'];
-var totalcustomers = 0;
-var totalcookies = 0;
+var allLocations = [];
+var locationsTable = document.getElementById('store-locations');
+var tableHeadings = ['Location Name','6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total'];
+var addLocationForm = document.getElementById('form-add-location');
 
-var storeHolder = [];
+var columnTotals = ['Total Cookies for All Locations'];
 
-var tableId = document.getElementById('tableId');
-var trEl = document.createElement('tr');
+/*
+  for each store location:
+    -store min hourly customers
+    -store max hourly customers
+    -store average cookies per sale
+    -generate number of customers per hour, a random number between min and max
+    -for each hour:
+      -calculate and store projected number of cookies purchased
+    -store results in an array that is a property of the store location object
+  */
 
-
-function CookieStores(name, minCustomer, maxCustomer, minCookie, maxCookie, avgCookie) {
-  this.name = name;
-  this.minCustomer = minCustomer;
-  this.maxCustomer = maxCustomer;
-  this.minCookie = minCookie;
-  this.maxCookie = maxCookie;
-  this.avgCookie = avgCookie;
-  storeHolder.push(this);
-
+function StoreLocation(locationName, minCust, maxCust, avgCookies) {
+  this.locationName = locationName;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookies = avgCookies;
+  allLocations.push(this);
 }
-
-CookieStores.prototype.render = function () {
+StoreLocation.prototype.render = function() {
   var trEl = document.createElement('tr');
-  for (var i = 0; i < timeSlots.length; i++) {
+  var tdEl = document.createElement('td');
+  var totalCookies = 0;
 
-    var customers = Math.random() * (this.maxCustomer - this.minCustomer) + this.minCustomer * this.avgCookie;
-    customers = Math.floor(customers);
-    totalcustomers += customers;
-
-
-    var cookiesSold = Math.random() * (this.maxCookie - this.minCookie) + this.minCookie * this.avgCookie;
-    cookiesSold = Math.floor(cookiesSold);
-    totalcookies += cookiesSold;
+  tdEl.textContent = this.locationName;
+  trEl.appendChild(tdEl);
 
 
-    var tdEl = document.createElement('td');
-    tdEl.textContent = this.name + customers + ' customers & ' + cookiesSold + ' cookies sold.';
+  //start at tableHeadings[1] to skip the Location Name and iterate for each hour heading. End at tableHeadings.length - 1 to leave space for total.
+  for( var i = 1; i < tableHeadings.length - 1; i++ ){
+    var cookiesPerHour = Math.round( this.avgCookies * custPerHour( this.minCust , this.maxCust ) );
+    tdEl = document.createElement('td');
+    tdEl.textContent = cookiesPerHour;
+    trEl.appendChild( tdEl );
+    totalCookies += cookiesPerHour;
+    if(columnTotals[i] === undefined){
+      columnTotals[i] = cookiesPerHour;
+    }
+    else {
+      columnTotals[i] += cookiesPerHour;
+    }
 
-    trEl.appendChild(tdEl);
-    tableId.appendChild(trEl);
   }
-  var tdEl = document.createElement('td');
-  tdEl.textContent = totalcustomers + ' total customers today and ' + totalcookies + ' cookies sold.';
+  tdEl = document.createElement('td');
+  tdEl.textContent = totalCookies;
   trEl.appendChild(tdEl);
-  tableId.appendChild(trEl);
 
-  var tdEl = document.createElement('td');
-  tdEl.textContent = this.avgCookie;
-  trEl.appendChild(tdEl);
-  tableId.appendChild(trEl);
+  locationsTable.appendChild(trEl);
+
+};
+
+/*
+calculate customers per hour. This is almost identical to getRandomIntInclusive() at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random , except that here the input arguments are assumed to be integers.
+*/
+function custPerHour( min, max ) {
+  return Math.floor(Math.random() * ( max - min + 1 )) + min;
 }
-
 function makeHeaderRow() {
   var trEl = document.createElement('tr');
-  for (var i = 0; i < timeSlots.length; i++) {
-    var thEl = document.createElement('th');
-    thEl.textContent = timeSlots[i];
+  var thEl;
+  for (var i = 0; i < tableHeadings.length; i++){
+    thEl = document.createElement('th');
+    thEl.textContent = tableHeadings[i];
     trEl.appendChild(thEl);
   }
-  var thEl = document.createElement('th');
-  thEl.textContent = 'Totals';
-  trEl.appendChild(thEl);
-
-  var thEl = document.createElement('th');
-  thEl.textContent = 'Average Cookies';
-  trEl.appendChild(thEl);
-
-  tableId.appendChild(trEl);
+  locationsTable.appendChild(trEl);
 }
 
-function renderAllStores() {
-  for(var i in storeHolder) {
-    storeHolder[i].render();
+function addNewLocation(event) {
+  event.preventDefault();
+  var newLocation = event.target.locationName.value;
+  var newMinCust = parseInt(event.target.minCust.value);
+  var newMaxCust = parseInt(event.target.maxCust.value);
+  var newAvgCookies = parseFloat(event.target.avgCookies.value);
+
+  new StoreLocation(newLocation, newMinCust, newMaxCust, newAvgCookies);
+  locationsTable.innerHTML = '';
+  makeHeaderRow();
+  renderAllLocations();
+  makeFooterRow();
+}
+
+new StoreLocation('First & Pike', 23, 65, 6.3);
+new StoreLocation('SeaTac Airport', 3, 24, 1.2);
+new StoreLocation('Seattle Center', 11, 38, 3.7);
+new StoreLocation('Capitol Hill', 20, 38, 2.3);
+new StoreLocation('Alki', 2, 16, 4.6);
+
+addLocationForm.addEventListener('submit', addNewLocation);
+
+function renderAllLocations() {
+  for(var i in allLocations) {
+    allLocations[i].render();
   }
 }
+function makeFooterRow() {
+  var trEl = document.createElement('tr');
+  var tdEl;
+  var totalOfTotals = 0;
+  for(var i in columnTotals) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = columnTotals[i];
+    trEl.appendChild(tdEl);
+    //skip the row title when calculating total of totals
+    if(i > 0) {
+      totalOfTotals += parseInt(columnTotals[i]);
+    }
+  }
+  tdEl = document.createElement('td');
+  tdEl.textContent = totalOfTotals;
+  trEl.appendChild(tdEl);
 
-var pike = new CookieStores('Pike Store:', 500, 180, 180, 270, 6.3);
-var seatac = new CookieStores('Seatac Store:', 15, 33, 30, 40, 1.2);
-var seattleCenter = new CookieStores('Seattle Center:', 25, 75, 25, 105, 3.7);
-var capitalHill = new CookieStores('Capitol Hill:', 20, 55, 20, 40, 2.3);
-var alki = new CookieStores('Alki:', 40, 65, 40, 75, 4.6);
-
+  locationsTable.appendChild(trEl);
+}
 makeHeaderRow();
-pike.render();
-seatac.render();
-seattleCenter.render();
-capitalHill.render();
-alki.render();
+renderAllLocations();
+makeFooterRow();
